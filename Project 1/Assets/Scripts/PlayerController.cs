@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5.0f;
-    private float turnSpeed;
-    public float horizontalInput;
+    //Private variables
+    private float speed = 5.0f;
+    private float turnSpeed = 25.0f;
+    private float horizontalInput;
+    private float verticalInput;
 
     // Start is called before the first frame update
     void Start()
@@ -20,9 +22,10 @@ public class PlayerController : MonoBehaviour
         //lower case t refers to a component of the current object (playercontroller). Upper case T is a seperate class
         //Input gets us the input manager then getaxis gets us axis referred to in the brackets
         horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
 
         //transform.Translate(0, 0, 1);
-        transform.Translate(Vector3.forward * Time.deltaTime * speed);
-        transform.Translate(Vector3.right * Time.deltaTime * turnSpeed * horizontalInput);
+        transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);
+        transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed * horizontalInput);
     }
 }
